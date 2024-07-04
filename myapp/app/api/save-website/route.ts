@@ -1,6 +1,6 @@
 // app/api/save-website/route.ts
 
-import { PrismaClient,Prisma } from '@prisma/client'
+import { PrismaClient } from 'prisma/@prisma/client'
 import { NextResponse } from 'next/server';
 
 const prisma = new PrismaClient()
