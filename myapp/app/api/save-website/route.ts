@@ -1,13 +1,19 @@
 // app/api/save-website/route.ts
 
+import { PrismaClient,Prisma } from '@prisma/client'
 import { NextResponse } from 'next/server';
-import { PrismaClient } from './node_modules/.prisma/client'
+
 const prisma = new PrismaClient()
+
+
 
 export async function POST(request: Request) {
   console.log("API Route Hit"); // Debugging log
   const { website } = await request.json();
   console.log("Website:", website); // Debugging log
+
+  
+
 
   if (!website) {
     return NextResponse.json({ success: false, message: "Website URL is required" }, { status: 400 });
