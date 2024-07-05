@@ -13,3 +13,14 @@ model Website {
   url       String
   createdAt DateTime @default(now())
 }
+
+model TrackingEvent {
+  id            Int      @id @default(autoincrement())
+  type          String
+  url           String
+  element       String?
+  elementId     String?
+  elementClasses String?
+  timestamp     DateTime
+  createdAt     DateTime @default(now())
+}

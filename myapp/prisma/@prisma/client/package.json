@@ -3,6 +3,9 @@
   "main": "index.js",
   "types": "index.d.ts",
   "browser": "index-browser.js",
+  "scripts": {
+      "postinstall": "npx prisma generate"
+    },
   "exports": {
     "./package.json": "./package.json",
     ".": {
@@ -72,6 +75,7 @@
       "import": "./runtime/binary.js",
       "default": "./runtime/binary.js"
     },
+    
     "./generator-build": {
       "require": "./generator-build/index.js",
       "import": "./generator-build/index.js",
@@ -81,4 +85,5 @@
   },
   "version": "5.16.1",
   "sideEffects": false
+  
 }

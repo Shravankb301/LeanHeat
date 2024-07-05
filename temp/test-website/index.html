@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Test Website</title>
+</head>
+<body>
+  <h1>Welcome to the Test Website</h1>
+  <button id="testButton">Click Me</button>
+
+  <!-- Include your tracking script -->
+  <script>
+    (function () {
+      function sendTrackingData(data) {
+        fetch('http://localhost:3000/api/track-event', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data),
+        }).catch((error) => console.error('Error tracking event:', error));
+      }
+
+      document.addEventListener('DOMContentLoaded', () => {
+        // Track page visit
+        sendTrackingData({
+          type: 'page-visit',
+          url: window.location.href,
+          timestamp: new Date().toISOString(),
+        });
+
+        // Track clicks
+        document.getElementById('testButton').addEventListener('click', () => {
+          sendTrackingData({
+            type: 'click',
+            element: 'BUTTON',
+            id: 'testButton',
+            classes: '',
+            url: window.location.href,
+            timestamp: new Date().toISOString(),
+          });
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
