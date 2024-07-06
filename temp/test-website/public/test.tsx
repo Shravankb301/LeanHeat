@@ -1,7 +1,5 @@
-"use client";
-
 import { useState, useEffect, ChangeEvent, KeyboardEvent } from "react";
-import { useRouter } from 'next/navigation'
+import { useRouter } from "next/router";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Toaster, toast } from "sonner";
@@ -13,11 +11,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-
-interface Website {
-  id?: string;
-  url: string;
-}
 
 function isValidURL(string: string): boolean {
   const pattern = new RegExp(
@@ -33,9 +26,9 @@ function isValidURL(string: string): boolean {
 }
 
 export default function Home() {
-  const router = useRouter()
+  const router = useRouter();  // Add useRouter
   const [website, setWebsite] = useState<string>("");
-  const [websites, setWebsites] = useState<Website[]>([]);
+  const [websites, setWebsites] = useState<any[]>([]);
   const [error, setError] = useState<string>("");
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>): void => {
@@ -115,6 +108,10 @@ export default function Home() {
     fetchWebsites();
   }, []);
 
+  const handleSeeDetails = (id: string): void => {
+    router.push(`/details/${id}`);
+  };
+
   return (
     <div>
       <div className="w-full max-w-sm items-center gap-1.5 p-8 justify-between">
@@ -150,7 +147,7 @@ export default function Home() {
                 <TableCell>{index + 1}</TableCell>
                 <TableCell>{site.url}</TableCell>
                 <TableCell>
-                  <Button onClick={() => router.push(`/details?website=${encodeURIComponent(site.url)}`)}>See Details</Button>
+                  <Button onClick={() => handleSeeDetails(site.id)}>See Details</Button>
                 </TableCell>
               </TableRow>
             ))}
